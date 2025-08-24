@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El tamaño del mundo cuántico - Constante de Planck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-size: 1.2em;
+        }
+
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateX(5px);
+        }
+
+        h2 {
+            color: #34495e;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .circuit-simulator {
+            background: #2c3e50;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .circuit-simulator::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .led-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .led-container {
+            text-align: center;
+            position: relative;
+        }
+
+        .led {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid #34495e;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.8), transparent);
+            opacity: 0.6;
+        }
+
+        .led:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        .led.active {
+            animation: glow 1s ease-in-out infinite alternate;
+            opacity: 1;
+        }
+
+        @keyframes glow {
+            0% { box-shadow: 0 0 20px currentColor; }
+            100% { box-shadow: 0 0 40px currentColor, 0 0 60px currentColor; }
+        }
+
+        .led.red { background-color: #ff4444; }
+        .led.yellow { background-color: #ffdd44; }
+        .led.green { background-color: #44ff44; }
+        .led.blue { background-color: #4444ff; }
+
+        .led-label {
+            color: white;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .voltage-control {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 15px 0;
+        }
+
+        .voltage-slider {
+            flex: 1;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, #2c3e50, #667eea);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .voltage-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            background: white;
+            border: 3px solid #667eea;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .voltage-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+        }
+
+        .voltage-display {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #2c3e50;
+            min-width: 100px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .data-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ecf0f1;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .data-table input {
+            width: 100%;
+            padding: 8px;
+            border: 2px solid #bdc3c7;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        .data-table input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 20px auto;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(0);
+        }
+
+        .result-display {
+            background: linear-gradient(135deg, #11998e, #38ef7d);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2em;
+            box-shadow: 0 5px 20px rgba(17, 153, 142, 0.3);
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-display.show {
+            display: block;
+        }
+
+        .formula {
+            background: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            margin: 10px 0;
+            text-align: center;
+            font-size: 1.1em;
+            border-left: 4px solid #667eea;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-icon {
+            font-size: 1.5em;
+        }
+
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .material-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .material-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            .led-display { gap: 20px; }
+            .led {
+                width: 60px;
+                height: 60px;
+            }
+            .data-table {
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 El tamaño del mundo cuántico</h1>
+        <p class="subtitle">Midiendo la Constante de Planck con LEDs</p>
+
+        <div class="section">
+            <h2><span class="icon">📖</span>Introducción</h2>
+            <p>En este experimento, vamos a medir una de las constantes más importantes de la física cuántica: <strong>la constante de Planck (ℏ)</strong>. 
+            Utilizaremos algo tan simple como LEDs de diferentes colores para adentrarnos en el fascinante mundo cuántico.</p>
+            <div class="formula">E = ℏω</div>
+            <p>Esta ecuación fundamental relaciona la energía de un fotón con su frecuencia angular.</p>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">⚠️</span>Precauciones Importantes</h2>
+            <div class="warning">
+                <span class="warning-icon">⚠️</span>
+                <div>
+                    <strong>¡Cuidado con los LEDs!</strong> Son componentes delicados. Siempre comienza con el voltaje en 0 y aumenta gradualmente. 
+                    Un voltaje excesivo puede quemarlos permanentemente.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">🔌</span>Simulador del Circuito</h2>
+            <div class="circuit-simulator">
+                <h3 style="color: white; text-align: center; margin-bottom: 20px;">
+                    📌 Instrucciones: Haz clic en un LED para seleccionarlo, luego ajusta el voltaje
+                </h3>
+                <div class="led-display">
+                    <div class="led-container">
+                        <div class="led red" data-color="red" data-wavelength="700"></div>
+                        <div class="led-label">Rojo<br>λ = 700 nm<br><small>~1.8V</small></div>
+                    </div>
+                    <div class="led-container">
+                        <div class="led yellow" data-color="yellow" data-wavelength="590"></div>
+                        <div class="led-label">Amarillo<br>λ = 590 nm<br><small>~2.0V</small></div>
+                    </div>
+                    <div class="led-container">
+                        <div class="led green" data-color="green" data-wavelength="530"></div>
+                        <div class="led-label">Verde<br>λ = 530 nm<br><small>~2.2V</small></div>
+                    </div>
+                    <div class="led-container">
+                        <div class="led blue" data-color="blue" data-wavelength="470"></div>
+                        <div class="led-label">Azul<br>λ = 470 nm<br><small>~3.0V</small></div>
+                    </div>
+                </div>
+                
+                <div class="voltage-control">
+                    <h3 style="color: white; margin-bottom: 15px;">Control de Voltaje (Potenciómetro)</h3>
+                    <div class="slider-container">
+                        <span style="color: white;">0V</span>
+                        <input type="range" class="voltage-slider" id="voltageSlider" min="0" max="5" step="0.01" value="0">
+                        <span style="color: white;">5V</span>
+                        <div class="voltage-display" id="voltageDisplay">0.00 V</div>
+                    </div>
+                    <div style="text-align: center; color: white; margin-top: 15px; font-size: 0.9em;">
+                        <span id="statusMessage">Selecciona un LED para comenzar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">📊</span>Tabla de Datos Experimentales</h2>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Color del LED</th>
+                        <th>λ (nm)</th>
+                        <th>Voltaje (V)</th>
+                        <th>Frecuencia ω (Hz)</th>
+                        <th>Energía E (J)</th>
+                        <th>Constante ℏ (J·s)</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTableBody">
+                    <tr data-color="red">
+                        <td style="color: #ff4444; font-weight: bold;">Rojo</td>
+                        <td>700</td>
+                        <td><input type="number" class="voltage-input" step="0.01" placeholder="0.00"></td>
+                        <td class="freq">-</td>
+                        <td class="energy">-</td>
+                        <td class="planck">-</td>
+                    </tr>
+                    <tr data-color="yellow">
+                        <td style="color: #ffaa00; font-weight: bold;">Amarillo</td>
+                        <td>590</td>
+                        <td><input type="number" class="voltage-input" step="0.01" placeholder="0.00"></td>
+                        <td class="freq">-</td>
+                        <td class="energy">-</td>
+                        <td class="planck">-</td>
+                    </tr>
+                    <tr data-color="green">
+                        <td style="color: #44ff44; font-weight: bold;">Verde</td>
+                        <td>530</td>
+                        <td><input type="number" class="voltage-input" step="0.01" placeholder="0.00"></td>
+                        <td class="freq">-</td>
+                        <td class="energy">-</td>
+                        <td class="planck">-</td>
+                    </tr>
+                    <tr data-color="blue">
+                        <td style="color: #4444ff; font-weight: bold;">Azul</td>
+                        <td>470</td>
+                        <td><input type="number" class="voltage-input" step="0.01" placeholder="0.00"></td>
+                        <td class="freq">-</td>
+                        <td class="energy">-</td>
+                        <td class="planck">-</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <button class="calculate-btn" onclick="calculateAll()">Calcular Constante de Planck</button>
+            
+            <div class="result-display" id="resultDisplay">
+                <h3>🎉 Resultado del Experimento</h3>
+                <p id="averagePlanck"></p>
+                <p style="font-size: 0.9em; margin-top: 10px;">Valor teórico: ℏ = 1.054 × 10⁻³⁴ J·s</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">🧮</span>Fórmulas Utilizadas</h2>
+            <div class="formula">ω = 2πc/λ</div>
+            <p>Donde c = 3×10⁸ m/s (velocidad de la luz)</p>
+            
+            <div class="formula">E = eV</div>
+            <p>Donde e = 1.6×10⁻¹⁹ C (carga del electrón)</p>
+            
+            <div class="formula">ℏ = E/ω</div>
+            <p>Constante de Planck reducida</p>
+        </div>
+
+        <div class="section">
+            <h2><span class="icon">🛠️</span>Materiales Necesarios</h2>
+            <div class="materials-grid">
+                <div class="material-item">📦 Batería de 9V con conector</div>
+                <div class="material-item">🔧 Potenciómetro de 20kΩ</div>
+                <div class="material-item">🔌 2 Resistencias de 10kΩ</div>
+                <div class="material-item">📏 Multímetro digital</div>
+                <div class="material-item">💡 LEDs de colores (rojo, amarillo, verde, azul)</div>
+                <div class="material-item">🔗 Protoboard y cables</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Constantes físicas
+        const c = 3e8; // Velocidad de la luz en m/s
+        const e = 1.6e-19; // Carga del electrón en Coulombs
+        const pi = Math.PI;
+        
+        // Voltajes típicos de encendido para cada LED
+        const thresholdVoltages = {
+            red: 1.8,
+            yellow: 2.0,
+            green: 2.2,
+            blue: 3.0
+        };
+        
+        // Variables para el LED seleccionado
+        let selectedLED = null;
+        
+        // Manejar selección de LED
+        document.querySelectorAll('.led').forEach(led => {
+            led.addEventListener('click', function() {
+                const statusMessage = document.getElementById('statusMessage');
+                
+                // Si se hace clic en el LED ya seleccionado, deseleccionarlo
+                if (selectedLED === this.dataset.color) {
+                    selectedLED = null;
+                    this.classList.remove('active');
+                    this.style.border = '3px solid #34495e';
+                    statusMessage.textContent = 'Selecciona un LED para comenzar';
+                    // Resetear slider
+                    document.getElementById('voltageSlider').value = 0;
+                    document.getElementById('voltageDisplay').textContent = '0.00 V';
+                    return;
+                }
+                
+                // Remover selección previa y resetear todos los LEDs
+                document.querySelectorAll('.led').forEach(l => {
+                    l.classList.remove('active');
+                    l.style.border = '3px solid #34495e';
+                });
+                
+                // Seleccionar nuevo LED
+                selectedLED = this.dataset.color;
+                this.style.border = '3px solid white';
+                statusMessage.textContent = `LED ${selectedLED} seleccionado - Ajusta el voltaje hasta que se encienda`;
+                
+                // Resetear slider a 0
+                document.getElementById('voltageSlider').value = 0;
+                document.getElementById('voltageDisplay').textContent = '0.00 V';
+            });
+        });
+        
+        // Control del slider de voltaje
+        const voltageSlider = document.getElementById('voltageSlider');
+        const voltageDisplay = document.getElementById('voltageDisplay');
+        
+        voltageSlider.addEventListener('input', function() {
+            const voltage = parseFloat(this.value);
+            voltageDisplay.textContent = voltage.toFixed(2) + ' V';
+            const statusMessage = document.getElementById('statusMessage');
+            
+            if (!selectedLED) {
+                statusMessage.textContent = '⚠️ Primero selecciona un LED haciendo clic sobre él';
+                return;
+            }
+            
+            // Verificar el LED seleccionado
+            const led = document.querySelector(`.led.${selectedLED}`);
+            const threshold = thresholdVoltages[selectedLED];
+            
+            if (voltage >= threshold) {
+                led.classList.add('active');
+                statusMessage.textContent = `✅ LED ${selectedLED} encendido a ${voltage.toFixed(2)}V`;
+                
+                // Auto-rellenar el voltaje en la tabla cuando se enciende
+                const row = document.querySelector(`tr[data-color="${selectedLED}"]`);
+                if (row) {
+                    const input = row.querySelector('.voltage-input');
+                    // Solo actualizar si está vacío o si es la primera vez que se enciende
+                    if (!input.value || parseFloat(input.value) === 0) {
+                        input.value = voltage.toFixed(2);
+                    }
+                }
+            } else {
+                led.classList.remove('active');
+                const remaining = (threshold - voltage).toFixed(2);
+                statusMessage.textContent = `LED ${selectedLED} seleccionado - Necesitas ${remaining}V más para encenderlo`;
+            }
+        });
+        
+        // Función para calcular todos los valores
+        function calculateAll() {
+            const rows = document.querySelectorAll('#dataTableBody tr');
+            let validCount = 0;
+            let planckSum = 0;
+            
+            rows.forEach(row => {
+                const voltageInput = row.querySelector('.voltage-input');
+                const voltage = parseFloat(voltageInput.value);
+                
+                if (voltage && voltage > 0) {
+                    const wavelength = parseFloat(row.cells[1].textContent) * 1e-9; // Convertir nm a m
+                    
+                    // Calcular frecuencia angular
+                    const omega = (2 * pi * c) / wavelength;
+                    
+                    // Calcular energía
+                    const energy = e * voltage;
+                    
+                    // Calcular constante de Planck
+                    const planck = energy / omega;
+                    
+                    // Mostrar resultados
+                    row.querySelector('.freq').textContent = omega.toExponential(3);
+                    row.querySelector('.energy').textContent = energy.toExponential(3);
+                    row.querySelector('.planck').textContent = planck.toExponential(3);
+                    
+                    validCount++;
+                    planckSum += planck;
+                    
+                    // Añadir efecto visual
+                    row.style.background = 'linear-gradient(to right, rgba(102, 126, 234, 0.1), transparent)';
+                }
+            });
+            
+            // Mostrar promedio si hay datos válidos
+            if (validCount > 0) {
+                const averagePlanck = planckSum / validCount;
+                const resultDisplay = document.getElementById('resultDisplay');
+                const averagePlanckElement = document.getElementById('averagePlanck');
+                
+                averagePlanckElement.innerHTML = `
+                    <strong>Valor promedio medido:</strong><br>
+                    ℏ = ${averagePlanck.toExponential(3)} J·s<br>
+                    <small>Error relativo: ${(Math.abs(averagePlanck - 1.054e-34) / 1.054e-34 * 100).toFixed(1)}%</small>
+                `;
+                
+                resultDisplay.classList.add('show');
+            } else {
+                alert('Por favor, ingresa al menos un valor de voltaje para calcular.');
+            }
+        }
+        
+        // Añadir animación inicial
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.querySelectorAll('.section').forEach((section, index) => {
+                    section.style.opacity = '0';
+                    section.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        section.style.transition = 'all 0.5s ease';
+                        section.style.opacity = '1';
+                        section.style.transform = 'translateY(0)';
+                    }, index * 100);
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>

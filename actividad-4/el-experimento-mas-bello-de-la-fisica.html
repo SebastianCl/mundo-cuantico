@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El experimento más bello de la física - Simulación Interactiva</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .controls {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: fit-content;
+        }
+
+        .controls h3 {
+            margin-bottom: 20px;
+            color: #4ecdc4;
+            font-size: 1.3rem;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #e0e0e0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: #333;
+            outline: none;
+            -webkit-appearance: none;
+            margin-bottom: 8px;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
+        }
+
+        .value-display {
+            font-size: 0.9rem;
+            color: #4ecdc4;
+            font-weight: bold;
+        }
+
+        .color-selector {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .color-option.selected {
+            border-color: #ffffff;
+            transform: scale(1.1);
+            box-shadow: 0 0 15px currentColor;
+        }
+
+        .red {
+            background: #ff0000;
+        }
+
+        .green {
+            background: #00ff00;
+        }
+
+        .blue {
+            background: #0080ff;
+        }
+
+        .violet {
+            background: #8000ff;
+        }
+
+        .simulation-area {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 15px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .experiment-setup {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            height: 120px;
+        }
+
+        .laser {
+            width: 60px;
+            height: 20px;
+            background: linear-gradient(90deg, #333, #666);
+            border-radius: 10px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 5px;
+        }
+
+        .laser::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--laser-color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--laser-color);
+        }
+
+        .laser-beam {
+            height: 2px;
+            background: linear-gradient(90deg, var(--laser-color), transparent);
+            position: absolute;
+            left: 60px;
+            width: 200px;
+            box-shadow: 0 0 5px var(--laser-color);
+        }
+
+        .cd-rom {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #ff6b6b, #4ecdc4, #feca57, #ff9ff3, #54a0ff, #ff6b6b);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .cd-rom::after {
+            content: '';
+            width: 15px;
+            height: 15px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .screen {
+            width: 200px;
+            height: 150px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diffraction-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .info-panel {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 20px;
+        }
+
+        .info-panel h3 {
+            color: #4ecdc4;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .measurements {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .measurement-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .measurement-item strong {
+            color: #4ecdc4;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .instructions {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 20px;
+        }
+
+        .instructions h3 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .instructions ol {
+            padding-left: 20px;
+        }
+
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .materials-list {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 20px;
+        }
+
+        .materials-list h3 {
+            color: #feca57;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .materials-list ul {
+            padding-left: 20px;
+        }
+
+        .materials-list li {
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .experiment-setup {
+                flex-direction: column;
+                height: auto;
+                gap: 20px;
+            }
+
+            .laser-beam {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>El experimento más bello de la física</h1>
+            <p>Simulación interactiva del experimento de la doble rendija de Young usando un CD-ROM como red de
+                difracción. Explora los fundamentos de la física cuántica y la naturaleza ondulatoria de la luz.</p>
+        </div>
+
+        <div class="main-content">
+            <div class="controls">
+                <h3>🎛️ Controles del Experimento</h3>
+
+                <div class="control-group">
+                    <label for="wavelength">Longitud de onda del láser:</label>
+                    <input type="range" id="wavelength" class="slider" min="400" max="700" value="650">
+                    <div class="value-display" id="wavelengthValue">650 nm (Rojo)</div>
+
+                    <div class="color-selector">
+                        <div class="color-option violet" data-wavelength="400" title="Violeta (400nm)"></div>
+                        <div class="color-option blue" data-wavelength="470" title="Azul (470nm)"></div>
+                        <div class="color-option green" data-wavelength="530" title="Verde (530nm)"></div>
+                        <div class="color-option red selected" data-wavelength="650" title="Rojo (650nm)"></div>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <label for="distance">Distancia CD-ROM a pantalla:</label>
+                    <input type="range" id="distance" class="slider" min="20" max="100" value="50">
+                    <div class="value-display" id="distanceValue">50 cm</div>
+                </div>
+
+                <div class="control-group">
+                    <label for="pitDistance">Distancia entre pits del CD-ROM:</label>
+                    <input type="range" id="pitDistance" class="slider" min="1400" max="1700" value="1600">
+                    <div class="value-display" id="pitDistanceValue">1600 nm</div>
+                </div>
+
+                <div class="control-group">
+                    <label for="intensity">Intensidad del láser:</label>
+                    <input type="range" id="intensity" class="slider" min="0.3" max="1" step="0.1" value="0.8">
+                    <div class="value-display" id="intensityValue">80%</div>
+                </div>
+            </div>
+
+            <div class="simulation-area">
+                <h3>🔬 Configuración del Experimento</h3>
+                <div class="experiment-setup">
+                    <div class="laser" id="laser">
+                        <div class="laser-beam" id="laserBeam"></div>
+                    </div>
+                    <div class="cd-rom" id="cdrom"></div>
+                    <div class="screen" id="screen">
+                        <canvas id="diffractionCanvas" width="200" height="150"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-panel">
+            <h3>📊 Mediciones y Resultados</h3>
+            <div class="measurements">
+                <div class="measurement-item">
+                    <strong>Ángulo del primer máximo:</strong>
+                    <span id="firstMaxAngle">0°</span>
+                </div>
+                <div class="measurement-item">
+                    <strong>Distancia entre máximos:</strong>
+                    <span id="maximaDistance">0 cm</span>
+                </div>
+                <div class="measurement-item">
+                    <strong>Número de máximos visibles:</strong>
+                    <span id="visibleMaxima">0</span>
+                </div>
+                <div class="measurement-item">
+                    <strong>Resolución espectral:</strong>
+                    <span id="spectralResolution">0 nm</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="materials-list">
+            <h3>🧪 Materiales Necesarios para el Experimento Real</h3>
+            <ul>
+                <li>Un CD-ROM en su caja (el experimento no es destructivo)</li>
+                <li>Un apuntador láser o láser astronómico</li>
+                <li>Un cartón (cuarto de pliego o trozo de caja de más de 30cm de longitud)</li>
+                <li>Un par de gafas para cine 3D (se destruirán en el proceso)</li>
+                <li>Transportador para medir ángulos</li>
+                <li>Regla, lápiz, calculadora, tijeras, cinta adhesiva</li>
+            </ul>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 Instrucciones para el Experimento Real</h3>
+            <ol>
+                <li>Coloca el CD-ROM en posición vertical, asegurado con el cartón</li>
+                <li>Apunta el láser hacia la mitad de la superficie reflectiva del CD-ROM</li>
+                <li>El punto de reflexión debe estar alineado horizontalmente con el centro del CD</li>
+                <li>Busca que la luz más brillante se refleje directamente hacia el láser</li>
+                <li>Observa las otras reflexiones proyectadas en el cartón</li>
+                <li>Mide los ángulos y distancias entre los máximos de difracción</li>
+                <li>Prueba con diferentes colores de láser si tienes disponibles</li>
+                <li>Modifica la distancia del CD a la pantalla y observa los cambios</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        class DiffractionSimulator {
+            constructor() {
+                this.canvas = document.getElementById('diffractionCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                this.wavelength = 650e-9; // metros
+                this.distance = 0.5; // metros
+                this.pitDistance = 1600e-9; // metros
+                this.intensity = 0.8;
+
+                this.initializeControls();
+                this.updateSimulation();
+            }
+
+            initializeControls() {
+                // Wavelength slider
+                const wavelengthSlider = document.getElementById('wavelength');
+                const wavelengthValue = document.getElementById('wavelengthValue');
+
+                wavelengthSlider.addEventListener('input', (e) => {
+                    this.wavelength = parseInt(e.target.value) * 1e-9;
+                    this.updateWavelengthDisplay(parseInt(e.target.value));
+                    this.updateLaserColor(parseInt(e.target.value));
+                    this.updateSimulation();
+                });
+
+                // Color selector
+                document.querySelectorAll('.color-option').forEach(option => {
+                    option.addEventListener('click', (e) => {
+                        const wavelength = parseInt(e.target.dataset.wavelength);
+                        wavelengthSlider.value = wavelength;
+                        this.wavelength = wavelength * 1e-9;
+                        this.updateWavelengthDisplay(wavelength);
+                        this.updateLaserColor(wavelength);
+                        this.updateColorSelection(e.target);
+                        this.updateSimulation();
+                    });
+                });
+
+                // Distance slider
+                const distanceSlider = document.getElementById('distance');
+                const distanceValue = document.getElementById('distanceValue');
+
+                distanceSlider.addEventListener('input', (e) => {
+                    this.distance = parseInt(e.target.value) * 0.01;
+                    distanceValue.textContent = `${e.target.value} cm`;
+                    this.updateSimulation();
+                });
+
+                // Pit distance slider
+                const pitDistanceSlider = document.getElementById('pitDistance');
+                const pitDistanceValue = document.getElementById('pitDistanceValue');
+
+                pitDistanceSlider.addEventListener('input', (e) => {
+                    this.pitDistance = parseInt(e.target.value) * 1e-9;
+                    pitDistanceValue.textContent = `${e.target.value} nm`;
+                    this.updateSimulation();
+                });
+
+                // Intensity slider
+                const intensitySlider = document.getElementById('intensity');
+                const intensityValue = document.getElementById('intensityValue');
+
+                intensitySlider.addEventListener('input', (e) => {
+                    this.intensity = parseFloat(e.target.value);
+                    intensityValue.textContent = `${Math.round(e.target.value * 100)}%`;
+                    this.updateSimulation();
+                });
+            }
+
+            updateWavelengthDisplay(wavelength) {
+                const wavelengthValue = document.getElementById('wavelengthValue');
+                let color = '';
+                if (wavelength < 450) color = 'Violeta';
+                else if (wavelength < 495) color = 'Azul';
+                else if (wavelength < 570) color = 'Verde';
+                else if (wavelength < 590) color = 'Amarillo';
+                else if (wavelength < 620) color = 'Naranja';
+                else color = 'Rojo';
+
+                wavelengthValue.textContent = `${wavelength} nm (${color})`;
+            }
+
+            updateLaserColor(wavelength) {
+                let color = '';
+                if (wavelength < 450) color = '#8000ff';
+                else if (wavelength < 495) color = '#0080ff';
+                else if (wavelength < 570) color = '#00ff00';
+                else if (wavelength < 590) color = '#ffff00';
+                else if (wavelength < 620) color = '#ff8000';
+                else color = '#ff0000';
+
+                document.documentElement.style.setProperty('--laser-color', color);
+            }
+
+            updateColorSelection(selectedOption) {
+                document.querySelectorAll('.color-option').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                selectedOption.classList.add('selected');
+            }
+
+            updateSimulation() {
+                this.clearCanvas();
+                this.drawDiffractionPattern();
+                this.updateMeasurements();
+            }
+
+            clearCanvas() {
+                this.ctx.fillStyle = '#f0f0f0';
+                this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+
+            drawDiffractionPattern() {
+                const centerY = this.canvas.height / 2;
+                const width = this.canvas.width;
+
+                // Calcular el patrón de difracción usando la ecuación de la red de difracción
+                // d * sin(θ) = m * λ
+
+                for (let x = 0; x < width; x++) {
+                    const angle = Math.atan((x - width / 2) / (this.distance * 100)); // aproximación de ángulo pequeño
+                    const sinTheta = Math.sin(angle);
+
+                    // Calcular la intensidad usando la fórmula de difracción de red
+                    let intensity = 0;
+
+                    // Condición de máximos: d * sin(θ) = m * λ
+                    const order = (this.pitDistance * sinTheta) / this.wavelength;
+                    const fractionalPart = Math.abs(order - Math.round(order));
+
+                    // Intensidad basada en qué tan cerca está de un máximo
+                    if (fractionalPart < 0.1) {
+                        intensity = this.intensity * (1 - fractionalPart * 10);
+                    }
+
+                    // Aplicar una envolvente gaussiana para simular el ancho del haz
+                    const envelope = Math.exp(-Math.pow((x - width / 2) / (width / 4), 2));
+                    intensity *= envelope;
+
+                    // Dibujar la línea vertical con la intensidad calculada
+                    if (intensity > 0.05) {
+                        const alpha = Math.min(intensity, 1);
+                        const wavelengthNm = this.wavelength * 1e9;
+                        let color = '';
+
+                        if (wavelengthNm < 450) color = `rgba(128, 0, 255, ${alpha})`;
+                        else if (wavelengthNm < 495) color = `rgba(0, 128, 255, ${alpha})`;
+                        else if (wavelengthNm < 570) color = `rgba(0, 255, 0, ${alpha})`;
+                        else if (wavelengthNm < 590) color = `rgba(255, 255, 0, ${alpha})`;
+                        else if (wavelengthNm < 620) color = `rgba(255, 128, 0, ${alpha})`;
+                        else color = `rgba(255, 0, 0, ${alpha})`;
+
+                        this.ctx.fillStyle = color;
+                        const lineHeight = intensity * this.canvas.height * 0.8;
+                        this.ctx.fillRect(x, centerY - lineHeight / 2, 1, lineHeight);
+                    }
+                }
+            }
+
+            updateMeasurements() {
+                // Calcular el ángulo del primer máximo
+                const firstOrder = this.wavelength / this.pitDistance;
+                const firstMaxAngle = Math.asin(firstOrder) * 180 / Math.PI;
+
+                // Calcular la distancia entre máximos en la pantalla
+                const angularSeparation = this.wavelength / this.pitDistance;
+                const linearSeparation = this.distance * Math.tan(angularSeparation) * 100; // en cm
+
+                // Calcular el número de máximos visibles
+                const maxOrder = Math.floor(this.pitDistance / this.wavelength);
+                const visibleMaxima = Math.min(maxOrder, 10); // limitado por el tamaño de la pantalla
+
+                // Resolución espectral aproximada
+                const spectralResolution = this.wavelength * 1e9 / maxOrder;
+
+                document.getElementById('firstMaxAngle').textContent = `${firstMaxAngle.toFixed(2)}°`;
+                document.getElementById('maximaDistance').textContent = `${linearSeparation.toFixed(2)} cm`;
+                document.getElementById('visibleMaxima').textContent = `${visibleMaxima}`;
+                document.getElementById('spectralResolution').textContent = `${spectralResolution.toFixed(1)} nm`;
+            }
+        }
+
+        // Inicializar la simulación cuando se carga la página
+        window.addEventListener('load', () => {
+            new DiffractionSimulator();
+        });
+    </script>
+</body>
+
+</html>
