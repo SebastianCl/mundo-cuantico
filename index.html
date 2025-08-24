@@ -6,107 +6,199 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Mundo Cuántico - Curso y Código Fuente</title>
 	<style>
-		body {
-			font-family: 'Segoe UI', Arial, sans-serif;
-			background: linear-gradient(120deg, #0f2027, #2c5364);
-			color: #fff;
+		* {
 			margin: 0;
-			min-height: 100vh;
+			padding: 0;
+			box-sizing: border-box;
 		}
 
-		header {
-			background: rgba(0, 0, 0, 0.7);
-			padding: 2rem 1rem 1rem 1rem;
-			text-align: center;
+		body {
+			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+			min-height: 100vh;
+			padding: 20px;
+		}
+
+		.container {
+			max-width: 1200px;
+			margin: 0 auto;
+			background: rgba(255, 255, 255, 0.95);
+			border-radius: 20px;
+			padding: 30px;
+			box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 		}
 
 		h1 {
-			margin: 0 0 0.5rem 0;
-			font-size: 2.5rem;
-			letter-spacing: 2px;
+			color: #2c3e50;
+			text-align: center;
+			margin-bottom: 10px;
+			font-size: 2.5em;
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			-webkit-background-clip: text;
+			background-clip: text;
+			-webkit-text-fill-color: transparent;
+			animation: pulse 2s ease-in-out infinite;
 		}
 
-		p {
-			font-size: 1.2rem;
-			max-width: 700px;
-			margin: 0 auto 1.5rem auto;
+		@keyframes pulse {
+
+			0%,
+			100% {
+				opacity: 1;
+			}
+
+			50% {
+				opacity: 0.8;
+			}
 		}
 
-		main {
-			max-width: 900px;
-			margin: 2rem auto;
-			background: rgba(255, 255, 255, 0.05);
-			border-radius: 12px;
-			box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-			padding: 2rem;
+		.subtitle {
+			text-align: center;
+			color: #7f8c8d;
+			margin-bottom: 30px;
+			font-size: 1.2em;
 		}
 
-		ul.lecciones {
+		.section {
+			margin-bottom: 30px;
+			padding: 20px;
+			background: #f8f9fa;
+			border-radius: 10px;
+			border-left: 4px solid #667eea;
+			transition: transform 0.3s ease;
+		}
+
+		.section:hover {
+			transform: translateX(5px);
+		}
+
+		h2 {
+			color: #34495e;
+			margin-bottom: 15px;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+
+		.icon {
+			width: 30px;
+			height: 30px;
+			background: linear-gradient(135deg, #667eea, #764ba2);
+			border-radius: 50%;
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			font-weight: bold;
+		}
+
+		ul.actividades {
 			list-style: none;
 			padding: 0;
 		}
 
-		ul.lecciones li {
+		ul.actividades li {
 			margin: 1rem 0;
+			background: white;
+			border-radius: 10px;
+			padding: 15px;
+			border-left: 3px solid #667eea;
+			transition: all 0.3s ease;
+		}
+
+		ul.actividades li:hover {
+			transform: translateX(5px);
+			box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 		}
 
 		a {
-			color: #00e6ff;
+			color: #667eea;
 			text-decoration: none;
 			font-weight: bold;
-			transition: color 0.2s;
+			transition: all 0.3s;
 		}
 
 		a:hover {
-			color: #ffeb3b;
+			color: #764ba2;
 		}
 
 		footer {
 			text-align: center;
 			padding: 1rem;
 			font-size: 0.95rem;
-			color: #bbb;
+			color: #7f8c8d;
+			margin-top: 20px;
+		}
+
+		@media (max-width: 768px) {
+			h1 {
+				font-size: 1.8em;
+			}
+
+			.container {
+				padding: 20px;
+			}
 		}
 	</style>
 </head>
 
 <body>
-	<header>
-		<div style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap;">
-			<h1 style="margin-bottom: 0;">Mundo Cuántico</h1>
-		</div>
-		<p>
+	<div class="container">
+		<h1>🔬 Mundo Cuántico</h1>
+		<p class="subtitle">
 			Bienvenido al blog del curso <strong>Mundo Cuántico</strong>.
 			<br>
 			Aquí encontrarás las actividades desarrolladas durante el curso.
 		</p>
-	</header>
-	<main>
-		<h2>Actividades disponibles</h2>
-		<ul class="lecciones">
-			<li>
-				<a href="actividad-2/jugando-con-el-spin.html">Actividad 2: Jugando con el Spin</a>
-			</li>
-			<li>
-				<a href="actividad-3/el-tamano-del-mundo-cuantico.html">Actividad 3: El tamaño del mundo cuántico</a>
-			</li>
-			<li>
-				<a href="actividad-4/el-experimento-mas-bello-de-la-fisica.html">Actividad 4: El experimento más bello
-					de la física</a>
-			</li>
-		</ul>
-	</main>
-	<footer style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap;">
 
-		<a href="https://github.com/SebastianCl/mundo-cuantico" target="_blank" title="Ver en GitHub"
-			style="display: flex; align-items: center;">
-			<svg height="32" width="32" viewBox="0 0 16 16" fill="#fff" aria-hidden="true" style="display: block;">
-				<path
-					d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
-				</path>
-			</svg>
-		</a>
-	</footer>
+		<div class="section">
+			<h2><span class="icon">📚</span>Actividades disponibles</h2>
+			<ul class="actividades">
+				<li>
+					<a href="actividad-2/jugando-con-el-spin.html">Actividad 2: Jugando con el Spin</a>
+				</li>
+				<li>
+					<a href="actividad-3/el-tamano-del-mundo-cuantico.html">Actividad 3: El tamaño del mundo
+						cuántico</a>
+				</li>
+				<li>
+					<a href="actividad-4/el-experimento-mas-bello-de-la-fisica.html">Actividad 4: El experimento más
+						bello
+						de la física</a>
+				</li>
+			</ul>
+		</div>
+
+		<footer style="display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap;">
+			<a href="https://github.com/SebastianCl/mundo-cuantico" target="_blank" title="Ver en GitHub"
+				style="display: flex; align-items: center; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; padding: 8px 15px; border-radius: 20px; transition: all 0.3s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">
+				<svg height="24" width="24" viewBox="0 0 16 16" fill="#fff" aria-hidden="true"
+					style="display: block; margin-right: 8px;">
+					<path
+						d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.01.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.11.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.19 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+					</path>
+				</svg>
+				Ver en GitHub
+			</a>
+		</footer>
+	</div>
+
+	<script>
+		// Añadir animación inicial
+		window.addEventListener('load', function () {
+			setTimeout(() => {
+				document.querySelectorAll('.section').forEach((section, index) => {
+					section.style.opacity = '0';
+					section.style.transform = 'translateY(20px)';
+					setTimeout(() => {
+						section.style.transition = 'all 0.5s ease';
+						section.style.opacity = '1';
+						section.style.transform = 'translateY(0)';
+					}, index * 100);
+				});
+			}, 100);
+		});
+	</script>
 </body>
 
 </html>
