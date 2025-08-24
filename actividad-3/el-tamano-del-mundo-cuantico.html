@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,8 +40,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.8;
+            }
         }
 
         .subtitle {
@@ -105,8 +113,13 @@
         }
 
         @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .led-display {
@@ -146,14 +159,30 @@
         }
 
         @keyframes glow {
-            0% { box-shadow: 0 0 20px currentColor; }
-            100% { box-shadow: 0 0 40px currentColor, 0 0 60px currentColor; }
+            0% {
+                box-shadow: 0 0 20px currentColor;
+            }
+
+            100% {
+                box-shadow: 0 0 40px currentColor, 0 0 60px currentColor;
+            }
         }
 
-        .led.red { background-color: #ff4444; }
-        .led.yellow { background-color: #ffdd44; }
-        .led.green { background-color: #44ff44; }
-        .led.blue { background-color: #4444ff; }
+        .led.red {
+            background-color: #ff4444;
+        }
+
+        .led.yellow {
+            background-color: #ffdd44;
+        }
+
+        .led.green {
+            background-color: #44ff44;
+        }
+
+        .led.blue {
+            background-color: #4444ff;
+        }
 
         .led-label {
             color: white;
@@ -296,6 +325,7 @@
                 opacity: 0;
                 transform: translateY(-20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -353,27 +383,43 @@
         }
 
         @media (max-width: 768px) {
-            h1 { font-size: 1.8em; }
-            .led-display { gap: 20px; }
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .led-display {
+                gap: 20px;
+            }
+
             .led {
                 width: 60px;
                 height: 60px;
             }
+
             .data-table {
                 font-size: 0.9em;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+            <a href="../index.html"
+                style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; padding: 8px 15px; border-radius: 20px; display: flex; align-items: center; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">
+                <span style="margin-right: 5px;">🏠</span> Inicio
+            </a>
+        </div>
         <h1>🔬 El tamaño del mundo cuántico</h1>
         <p class="subtitle">Midiendo la Constante de Planck con LEDs</p>
 
         <div class="section">
             <h2><span class="icon">📖</span>Introducción</h2>
-            <p>En este experimento, vamos a medir una de las constantes más importantes de la física cuántica: <strong>la constante de Planck (ℏ)</strong>. 
-            Utilizaremos algo tan simple como LEDs de diferentes colores para adentrarnos en el fascinante mundo cuántico.</p>
+            <p>En este experimento, vamos a medir una de las constantes más importantes de la física cuántica:
+                <strong>la constante de Planck (ℏ)</strong>.
+                Utilizaremos algo tan simple como LEDs de diferentes colores para adentrarnos en el fascinante mundo
+                cuántico.</p>
             <div class="formula">E = ℏω</div>
             <p>Esta ecuación fundamental relaciona la energía de un fotón con su frecuencia angular.</p>
         </div>
@@ -383,7 +429,8 @@
             <div class="warning">
                 <span class="warning-icon">⚠️</span>
                 <div>
-                    <strong>¡Cuidado con los LEDs!</strong> Son componentes delicados. Siempre comienza con el voltaje en 0 y aumenta gradualmente. 
+                    <strong>¡Cuidado con los LEDs!</strong> Son componentes delicados. Siempre comienza con el voltaje
+                    en 0 y aumenta gradualmente.
                     Un voltaje excesivo puede quemarlos permanentemente.
                 </div>
             </div>
@@ -413,12 +460,13 @@
                         <div class="led-label">Azul<br>λ = 470 nm<br><small>~3.0V</small></div>
                     </div>
                 </div>
-                
+
                 <div class="voltage-control">
                     <h3 style="color: white; margin-bottom: 15px;">Control de Voltaje (Potenciómetro)</h3>
                     <div class="slider-container">
                         <span style="color: white;">0V</span>
-                        <input type="range" class="voltage-slider" id="voltageSlider" min="0" max="5" step="0.01" value="0">
+                        <input type="range" class="voltage-slider" id="voltageSlider" min="0" max="5" step="0.01"
+                            value="0">
                         <span style="color: white;">5V</span>
                         <div class="voltage-display" id="voltageDisplay">0.00 V</div>
                     </div>
@@ -477,9 +525,9 @@
                     </tr>
                 </tbody>
             </table>
-            
+
             <button class="calculate-btn" onclick="calculateAll()">Calcular Constante de Planck</button>
-            
+
             <div class="result-display" id="resultDisplay">
                 <h3>🎉 Resultado del Experimento</h3>
                 <p id="averagePlanck"></p>
@@ -491,10 +539,10 @@
             <h2><span class="icon">🧮</span>Fórmulas Utilizadas</h2>
             <div class="formula">ω = 2πc/λ</div>
             <p>Donde c = 3×10⁸ m/s (velocidad de la luz)</p>
-            
+
             <div class="formula">E = eV</div>
             <p>Donde e = 1.6×10⁻¹⁹ C (carga del electrón)</p>
-            
+
             <div class="formula">ℏ = E/ω</div>
             <p>Constante de Planck reducida</p>
         </div>
@@ -517,7 +565,7 @@
         const c = 3e8; // Velocidad de la luz en m/s
         const e = 1.6e-19; // Carga del electrón en Coulombs
         const pi = Math.PI;
-        
+
         // Voltajes típicos de encendido para cada LED
         const thresholdVoltages = {
             red: 1.8,
@@ -525,15 +573,15 @@
             green: 2.2,
             blue: 3.0
         };
-        
+
         // Variables para el LED seleccionado
         let selectedLED = null;
-        
+
         // Manejar selección de LED
         document.querySelectorAll('.led').forEach(led => {
-            led.addEventListener('click', function() {
+            led.addEventListener('click', function () {
                 const statusMessage = document.getElementById('statusMessage');
-                
+
                 // Si se hace clic en el LED ya seleccionado, deseleccionarlo
                 if (selectedLED === this.dataset.color) {
                     selectedLED = null;
@@ -545,46 +593,46 @@
                     document.getElementById('voltageDisplay').textContent = '0.00 V';
                     return;
                 }
-                
+
                 // Remover selección previa y resetear todos los LEDs
                 document.querySelectorAll('.led').forEach(l => {
                     l.classList.remove('active');
                     l.style.border = '3px solid #34495e';
                 });
-                
+
                 // Seleccionar nuevo LED
                 selectedLED = this.dataset.color;
                 this.style.border = '3px solid white';
                 statusMessage.textContent = `LED ${selectedLED} seleccionado - Ajusta el voltaje hasta que se encienda`;
-                
+
                 // Resetear slider a 0
                 document.getElementById('voltageSlider').value = 0;
                 document.getElementById('voltageDisplay').textContent = '0.00 V';
             });
         });
-        
+
         // Control del slider de voltaje
         const voltageSlider = document.getElementById('voltageSlider');
         const voltageDisplay = document.getElementById('voltageDisplay');
-        
-        voltageSlider.addEventListener('input', function() {
+
+        voltageSlider.addEventListener('input', function () {
             const voltage = parseFloat(this.value);
             voltageDisplay.textContent = voltage.toFixed(2) + ' V';
             const statusMessage = document.getElementById('statusMessage');
-            
+
             if (!selectedLED) {
                 statusMessage.textContent = '⚠️ Primero selecciona un LED haciendo clic sobre él';
                 return;
             }
-            
+
             // Verificar el LED seleccionado
             const led = document.querySelector(`.led.${selectedLED}`);
             const threshold = thresholdVoltages[selectedLED];
-            
+
             if (voltage >= threshold) {
                 led.classList.add('active');
                 statusMessage.textContent = `✅ LED ${selectedLED} encendido a ${voltage.toFixed(2)}V`;
-                
+
                 // Auto-rellenar el voltaje en la tabla cuando se enciende
                 const row = document.querySelector(`tr[data-color="${selectedLED}"]`);
                 if (row) {
@@ -600,62 +648,62 @@
                 statusMessage.textContent = `LED ${selectedLED} seleccionado - Necesitas ${remaining}V más para encenderlo`;
             }
         });
-        
+
         // Función para calcular todos los valores
         function calculateAll() {
             const rows = document.querySelectorAll('#dataTableBody tr');
             let validCount = 0;
             let planckSum = 0;
-            
+
             rows.forEach(row => {
                 const voltageInput = row.querySelector('.voltage-input');
                 const voltage = parseFloat(voltageInput.value);
-                
+
                 if (voltage && voltage > 0) {
                     const wavelength = parseFloat(row.cells[1].textContent) * 1e-9; // Convertir nm a m
-                    
+
                     // Calcular frecuencia angular
                     const omega = (2 * pi * c) / wavelength;
-                    
+
                     // Calcular energía
                     const energy = e * voltage;
-                    
+
                     // Calcular constante de Planck
                     const planck = energy / omega;
-                    
+
                     // Mostrar resultados
                     row.querySelector('.freq').textContent = omega.toExponential(3);
                     row.querySelector('.energy').textContent = energy.toExponential(3);
                     row.querySelector('.planck').textContent = planck.toExponential(3);
-                    
+
                     validCount++;
                     planckSum += planck;
-                    
+
                     // Añadir efecto visual
                     row.style.background = 'linear-gradient(to right, rgba(102, 126, 234, 0.1), transparent)';
                 }
             });
-            
+
             // Mostrar promedio si hay datos válidos
             if (validCount > 0) {
                 const averagePlanck = planckSum / validCount;
                 const resultDisplay = document.getElementById('resultDisplay');
                 const averagePlanckElement = document.getElementById('averagePlanck');
-                
+
                 averagePlanckElement.innerHTML = `
                     <strong>Valor promedio medido:</strong><br>
                     ℏ = ${averagePlanck.toExponential(3)} J·s<br>
                     <small>Error relativo: ${(Math.abs(averagePlanck - 1.054e-34) / 1.054e-34 * 100).toFixed(1)}%</small>
                 `;
-                
+
                 resultDisplay.classList.add('show');
             } else {
                 alert('Por favor, ingresa al menos un valor de voltaje para calcular.');
             }
         }
-        
+
         // Añadir animación inicial
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             setTimeout(() => {
                 document.querySelectorAll('.section').forEach((section, index) => {
                     section.style.opacity = '0';
@@ -670,4 +718,5 @@
         });
     </script>
 </body>
+
 </html>

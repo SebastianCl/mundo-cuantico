@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -35,7 +36,7 @@
             color: #333;
             margin-bottom: 10px;
             font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .subtitle {
@@ -84,19 +85,47 @@
             font-size: 48px;
             font-weight: bold;
             background: white;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        .cube-face.x { color: #ff4444; background: #ffe0e0; }
-        .cube-face.y { color: #4444ff; background: #e0e0ff; }
-        .cube-face.z { color: #44ff44; background: #e0ffe0; }
+        .cube-face.x {
+            color: #ff4444;
+            background: #ffe0e0;
+        }
 
-        .cube-face.front  { transform: rotateY(0deg) translateZ(75px); }
-        .cube-face.back   { transform: rotateY(180deg) translateZ(75px); }
-        .cube-face.right  { transform: rotateY(90deg) translateZ(75px); }
-        .cube-face.left   { transform: rotateY(-90deg) translateZ(75px); }
-        .cube-face.top    { transform: rotateX(90deg) translateZ(75px); }
-        .cube-face.bottom { transform: rotateX(-90deg) translateZ(75px); }
+        .cube-face.y {
+            color: #4444ff;
+            background: #e0e0ff;
+        }
+
+        .cube-face.z {
+            color: #44ff44;
+            background: #e0ffe0;
+        }
+
+        .cube-face.front {
+            transform: rotateY(0deg) translateZ(75px);
+        }
+
+        .cube-face.back {
+            transform: rotateY(180deg) translateZ(75px);
+        }
+
+        .cube-face.right {
+            transform: rotateY(90deg) translateZ(75px);
+        }
+
+        .cube-face.left {
+            transform: rotateY(-90deg) translateZ(75px);
+        }
+
+        .cube-face.top {
+            transform: rotateX(90deg) translateZ(75px);
+        }
+
+        .cube-face.bottom {
+            transform: rotateX(-90deg) translateZ(75px);
+        }
 
         /* Cartas */
         .cards-section {
@@ -117,12 +146,12 @@
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .deck:hover {
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
         }
 
         .deck:active {
@@ -146,17 +175,50 @@
         }
 
         @keyframes cardFlip {
-            0% { transform: rotateY(180deg) scale(0.8); opacity: 0; }
-            50% { transform: rotateY(90deg) scale(1.1); }
-            100% { transform: rotateY(0deg) scale(1); opacity: 1; }
+            0% {
+                transform: rotateY(180deg) scale(0.8);
+                opacity: 0;
+            }
+
+            50% {
+                transform: rotateY(90deg) scale(1.1);
+            }
+
+            100% {
+                transform: rotateY(0deg) scale(1);
+                opacity: 1;
+            }
         }
 
-        .card-x { color: #ff4444; background: #ffe0e0; }
-        .card-y { color: #4444ff; background: #e0e0ff; }
-        .card-z { color: #44ff44; background: #e0ffe0; }
-        .card-b { color: #ff44ff; background: #ffe0ff; }
-        .card-q { color: #ffaa00; background: #fff0e0; }
-        .card-r { color: #00aaff; background: #e0f0ff; }
+        .card-x {
+            color: #ff4444;
+            background: #ffe0e0;
+        }
+
+        .card-y {
+            color: #4444ff;
+            background: #e0e0ff;
+        }
+
+        .card-z {
+            color: #44ff44;
+            background: #e0ffe0;
+        }
+
+        .card-b {
+            color: #ff44ff;
+            background: #ffe0ff;
+        }
+
+        .card-q {
+            color: #ffaa00;
+            background: #fff0e0;
+        }
+
+        .card-r {
+            color: #00aaff;
+            background: #e0f0ff;
+        }
 
         /* Jugadores */
         .players-section {
@@ -212,12 +274,12 @@
             margin: 20px auto;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
         .coin:hover {
             transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
         }
 
         .coin.flipping {
@@ -225,9 +287,17 @@
         }
 
         @keyframes coinFlip {
-            0% { transform: rotateX(0); }
-            50% { transform: rotateX(1800deg); }
-            100% { transform: rotateX(3600deg); }
+            0% {
+                transform: rotateX(0);
+            }
+
+            50% {
+                transform: rotateX(1800deg);
+            }
+
+            100% {
+                transform: rotateX(3600deg);
+            }
         }
 
         /* Controles */
@@ -248,12 +318,12 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
         }
 
         button:active {
@@ -282,8 +352,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .stats {
@@ -319,7 +396,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             z-index: 1000;
             animation: fadeIn 0.3s;
         }
@@ -337,8 +414,15 @@
         }
 
         @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .winner-text {
@@ -352,18 +436,25 @@
             .game-board {
                 grid-template-columns: 1fr;
             }
-            
+
             h1 {
                 font-size: 1.8em;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="game-container">
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
+            <a href="../index.html"
+                style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; padding: 8px 15px; border-radius: 20px; display: flex; align-items: center; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">
+                <span style="margin-right: 5px;">🏠</span> Inicio
+            </a>
+        </div>
         <h1>🎲 Jugando con el Espín 🧲</h1>
         <p class="subtitle">Un juego cuántico para explorar las propiedades del spin</p>
-        
+
         <div class="game-board">
             <div class="cube-section">
                 <h3>Cubo de Espín</h3>
@@ -379,30 +470,30 @@
                 </div>
                 <p id="cubeState">Estado: +Z</p>
             </div>
-            
+
             <div class="cards-section">
                 <h3>Cartas Magnéticas</h3>
                 <div class="deck" id="deck" onclick="drawCard()">
                     <span id="cardsLeft">30</span> 📇
                 </div>
                 <div id="currentCard" style="display:none;" class="current-card"></div>
-                
+
                 <div class="coin-section">
                     <h4>Automedidor Cuántico</h4>
                     <div class="coin" id="coin" onclick="flipCoin()">?</div>
                 </div>
             </div>
-            
+
             <div class="players-section">
                 <h3>Jugadores</h3>
                 <div id="playersList"></div>
             </div>
         </div>
-        
+
         <div class="info-panel" id="infoPanel">
             Haz clic en el mazo para sacar una carta
         </div>
-        
+
         <div class="stats">
             <div class="stat">
                 <div class="stat-label">Medidas Realizadas</div>
@@ -417,14 +508,14 @@
                 <div class="stat-value" id="direction">→</div>
             </div>
         </div>
-        
+
         <div class="controls">
             <button onclick="startNewGame()">🎮 Nuevo Juego</button>
             <button onclick="showRules()">📖 Reglas</button>
             <button onclick="addPlayer()">➕ Agregar Jugador</button>
         </div>
     </div>
-    
+
     <div class="modal" id="modal">
         <div class="modal-content">
             <div id="modalBody"></div>
@@ -485,7 +576,7 @@
             for (let i = 0; i < 2; i++) {
                 gameState.deck.push('R'); // Reversa
             }
-            
+
             // Barajar
             gameState.deck = shuffleArray(gameState.deck);
         }
@@ -503,7 +594,7 @@
         // Sacar carta
         function drawCard() {
             if (gameState.waitingForCoin || gameState.gameEnded) return;
-            
+
             let card;
             if (gameState.deck.length > 0) {
                 card = gameState.deck.pop();
@@ -516,7 +607,7 @@
                 endGame();
                 return;
             }
-            
+
             gameState.currentCard = card;
             showCard(card);
             processCard(card);
@@ -528,7 +619,7 @@
             cardEl.style.display = 'flex';
             cardEl.textContent = card;
             cardEl.className = 'current-card card-' + card.toLowerCase();
-            
+
             // Agregar a cartas usadas
             gameState.usedCards.push(card);
         }
@@ -537,8 +628,8 @@
         function processCard(card) {
             const player = gameState.players[gameState.currentPlayer];
             let message = `${player.name} sacó ${card}. `;
-            
-            switch(card) {
+
+            switch (card) {
                 case 'X':
                 case 'Y':
                     // Verificar si coincide con el estado del cubo
@@ -552,7 +643,7 @@
                         message += "Lanza el Automedidor Cuántico";
                     }
                     break;
-                    
+
                 case 'Z':
                     // Verificar si coincide con el estado del cubo
                     if (gameState.cubeState[1] === 'Z') {
@@ -565,19 +656,19 @@
                     }
                     nextTurn();
                     break;
-                    
+
                 case 'B':
                     player.score -= 1;
                     message += "Campo magnético aplicado: -1 punto. El cubo gira...";
                     randomRotateCube();
                     setTimeout(nextTurn, 1000);
                     break;
-                    
+
                 case 'Q':
                     gameState.waitingForCoin = true;
                     message += "Quantum Flip! Lanza el Automedidor";
                     break;
-                    
+
                 case 'R':
                     gameState.direction *= -1;
                     message += "¡Reversa temporal! Cambia la dirección";
@@ -585,7 +676,7 @@
                     nextTurn();
                     break;
             }
-            
+
             document.getElementById('infoPanel').textContent = message;
             updateDisplay();
         }
@@ -593,15 +684,15 @@
         // Lanzar moneda
         function flipCoin() {
             if (!gameState.waitingForCoin) return;
-            
+
             const coin = document.getElementById('coin');
             coin.classList.add('flipping');
-            
+
             setTimeout(() => {
                 const result = Math.random() < 0.5 ? -1 : 1;
                 coin.textContent = result > 0 ? '+' : '-';
                 coin.classList.remove('flipping');
-                
+
                 processCoinResult(result);
             }, 1000);
         }
@@ -610,7 +701,7 @@
         function processCoinResult(result) {
             const player = gameState.players[gameState.currentPlayer];
             const card = gameState.currentCard;
-            
+
             if (card === 'Q') {
                 // Quantum Flip
                 player.score += result * 2;
@@ -618,8 +709,8 @@
                 const currentAxis = gameState.cubeState[1];
                 gameState.cubeState = newSign + currentAxis;
                 rotateCube();
-                
-                document.getElementById('infoPanel').textContent = 
+
+                document.getElementById('infoPanel').textContent =
                     `Quantum Flip: ${result > 0 ? '+2' : '-2'} puntos. Cubo: ${gameState.cubeState}`;
             } else {
                 // Medida normal
@@ -627,14 +718,14 @@
                 gameState.cubeState = (result > 0 ? '+' : '-') + card;
                 rotateCube();
                 gameState.measureCount++;
-                
-                document.getElementById('infoPanel').textContent = 
+
+                document.getElementById('infoPanel').textContent =
                     `Medida: ${result > 0 ? '+1' : '-1'} punto. Cubo: ${gameState.cubeState}`;
             }
-            
+
             gameState.waitingForCoin = false;
             updateDisplay();
-            
+
             // Verificar fin del juego
             if (gameState.measureCount >= 30) {
                 setTimeout(endGame, 1500);
@@ -659,13 +750,13 @@
 
         // Siguiente turno
         function nextTurn() {
-            gameState.currentPlayer = (gameState.currentPlayer + gameState.direction + 
+            gameState.currentPlayer = (gameState.currentPlayer + gameState.direction +
                 gameState.players.length) % gameState.players.length;
             gameState.turnCount++;
-            
+
             // Resetear moneda
             document.getElementById('coin').textContent = '?';
-            
+
             updateDisplay();
             renderPlayers();
         }
@@ -676,7 +767,7 @@
             document.getElementById('turnCount').textContent = gameState.turnCount;
             document.getElementById('direction').textContent = gameState.direction > 0 ? '→' : '←';
             document.getElementById('cardsLeft').textContent = gameState.deck.length;
-            
+
             renderPlayers();
         }
 
@@ -684,7 +775,7 @@
         function renderPlayers() {
             const container = document.getElementById('playersList');
             container.innerHTML = '';
-            
+
             gameState.players.forEach((player, index) => {
                 const div = document.createElement('div');
                 div.className = 'player' + (index === gameState.currentPlayer ? ' active' : '');
@@ -702,7 +793,7 @@
                 alert('Máximo 4 jugadores');
                 return;
             }
-            
+
             const name = prompt('Nombre del jugador:');
             if (name) {
                 gameState.players.push({ name, score: 0 });
@@ -722,13 +813,13 @@
                 gameState.currentCard = null;
                 gameState.gameEnded = false;
                 gameState.usedCards = [];
-                
+
                 gameState.players.forEach(p => p.score = 0);
-                
+
                 document.getElementById('currentCard').style.display = 'none';
                 document.getElementById('coin').textContent = '?';
                 document.getElementById('infoPanel').textContent = 'Haz clic en el mazo para sacar una carta';
-                
+
                 createDeck();
                 rotateCube();
                 updateDisplay();
@@ -738,11 +829,11 @@
         // Fin del juego
         function endGame() {
             gameState.gameEnded = true;
-            
-            const winner = gameState.players.reduce((prev, current) => 
+
+            const winner = gameState.players.reduce((prev, current) =>
                 (prev.score > current.score) ? prev : current
             );
-            
+
             const modalBody = document.getElementById('modalBody');
             modalBody.innerHTML = `
                 <div class="winner-text">🏆 ¡Juego Terminado! 🏆</div>
@@ -750,12 +841,12 @@
                 <h3>Puntuación: ${winner.score} puntos</h3>
                 <hr style="margin: 20px 0;">
                 <h4>Puntuaciones Finales:</h4>
-                ${gameState.players.map(p => 
-                    `<p>${p.name}: ${p.score} puntos</p>`
-                ).join('')}
+                ${gameState.players.map(p =>
+                `<p>${p.name}: ${p.score} puntos</p>`
+            ).join('')}
                 <p style="margin-top: 20px;">Medidas realizadas: ${gameState.measureCount}</p>
             `;
-            
+
             document.getElementById('modal').style.display = 'block';
         }
 
@@ -783,7 +874,7 @@
                     <p>El juego termina después de 30 medidas. ¡El jugador con más puntos gana!</p>
                 </div>
             `;
-            
+
             document.getElementById('modal').style.display = 'block';
         }
 
@@ -796,4 +887,5 @@
         window.onload = initGame;
     </script>
 </body>
+
 </html>
