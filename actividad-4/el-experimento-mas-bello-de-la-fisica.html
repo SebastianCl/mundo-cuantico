@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            background: linear-gradient(135deg, #063833 0%, #125450 100%);
             color: #ffffff;
             min-height: 100vh;
             padding: 20px;
@@ -29,16 +29,17 @@
             text-align: center;
             margin-bottom: 30px;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(12, 31, 29, 0.8);
             border-radius: 15px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 178, 0.3);
+            color: #e0fffa;
         }
 
         .header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            background: linear-gradient(135deg, #00FFB2, #00B7FF);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -50,6 +51,7 @@
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.6;
+            color: #00FFB2;
         }
 
         .main-content {
@@ -60,17 +62,18 @@
         }
 
         .controls {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(12, 31, 29, 0.8);
             border-radius: 15px;
             padding: 25px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 178, 0.3);
             height: fit-content;
+            color: #e0fffa;
         }
 
         .controls h3 {
             margin-bottom: 20px;
-            color: #4ecdc4;
+            color: #00FFB2;
             font-size: 1.3rem;
         }
 
@@ -82,16 +85,17 @@
             display: block;
             margin-bottom: 8px;
             font-weight: 500;
-            color: #e0e0e0;
+            color: #00B7FF;
         }
 
         .slider {
             width: 100%;
             height: 6px;
             border-radius: 3px;
-            background: #333;
+            background: rgba(3, 59, 53, 0.8);
             outline: none;
             -webkit-appearance: none;
+            appearance: none;
             margin-bottom: 8px;
         }
 
@@ -101,24 +105,24 @@
             width: 18px;
             height: 18px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            background: linear-gradient(135deg, #00FFB2, #00B7FF);
             cursor: pointer;
-            box-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
+            box-shadow: 0 0 10px rgba(0, 255, 178, 0.5);
         }
 
         .slider::-moz-range-thumb {
             width: 18px;
             height: 18px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            background: linear-gradient(135deg, #00FFB2, #00B7FF);
             cursor: pointer;
             border: none;
-            box-shadow: 0 0 10px rgba(78, 205, 196, 0.3);
+            box-shadow: 0 0 10px rgba(0, 255, 178, 0.5);
         }
 
         .value-display {
             font-size: 0.9rem;
-            color: #4ecdc4;
+            color: #00FFB2;
             font-weight: bold;
         }
 
@@ -160,10 +164,11 @@
         }
 
         .simulation-area {
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(3, 59, 53, 0.8);
             border-radius: 15px;
             padding: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 178, 0.3);
+            box-shadow: 0 0 30px rgba(0, 255, 178, 0.2);
         }
 
         .experiment-setup {
@@ -208,12 +213,12 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: conic-gradient(from 0deg, #ff6b6b, #4ecdc4, #feca57, #ff9ff3, #54a0ff, #ff6b6b);
+            background: conic-gradient(from 0deg, #00FFB2, #00B7FF, #00FFEA, #12FF9B, #00FFB2);
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 178, 0.5);
         }
 
         .cd-rom::after {
@@ -242,16 +247,17 @@
         }
 
         .info-panel {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(12, 31, 29, 0.8);
             border-radius: 15px;
             padding: 25px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 178, 0.3);
             margin-top: 20px;
+            color: #e0fffa;
         }
 
         .info-panel h3 {
-            color: #4ecdc4;
+            color: #00FFB2;
             margin-bottom: 15px;
             font-size: 1.3rem;
         }
@@ -264,29 +270,30 @@
         }
 
         .measurement-item {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 255, 178, 0.1);
             padding: 15px;
             border-radius: 10px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 183, 255, 0.3);
         }
 
         .measurement-item strong {
-            color: #4ecdc4;
+            color: #00B7FF;
             display: block;
             margin-bottom: 5px;
         }
 
         .instructions {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(12, 31, 29, 0.8);
             border-radius: 15px;
             padding: 25px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 178, 0.3);
             margin-top: 20px;
+            color: #e0fffa;
         }
 
         .instructions h3 {
-            color: #ff6b6b;
+            color: #00FFB2;
             margin-bottom: 15px;
             font-size: 1.3rem;
         }
@@ -301,16 +308,17 @@
         }
 
         .materials-list {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(12, 31, 29, 0.8);
             border-radius: 15px;
             padding: 25px;
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 178, 0.3);
             margin-top: 20px;
+            color: #e0fffa;
         }
 
         .materials-list h3 {
-            color: #feca57;
+            color: #00FFB2;
             margin-bottom: 15px;
             font-size: 1.3rem;
         }
@@ -350,7 +358,7 @@
     <div class="container">
         <div style="display: flex; justify-content: flex-end; margin-top: 10px; margin-bottom: 10px;">
             <a href="../index.html"
-                style="background: linear-gradient(45deg, #ff6b6b, #4ecdc4); color: white; text-decoration: none; padding: 8px 15px; border-radius: 20px; display: flex; align-items: center; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">
+                style="background: linear-gradient(135deg, #00FFB2, #00B7FF); color: #033b35; text-decoration: none; padding: 8px 15px; border-radius: 20px; display: flex; align-items: center; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 3px 10px rgba(0,255,178,0.3);">
                 <span style="margin-right: 5px;">🏠</span> Inicio
             </a>
         </div>

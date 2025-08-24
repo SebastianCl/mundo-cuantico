@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #063833 0%, #125450 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -23,25 +23,26 @@
         }
 
         .game-container {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(12, 31, 29, 0.8);
             border-radius: 20px;
             padding: 30px;
             max-width: 1200px;
             width: 100%;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 255, 178, 0.2);
+            color: #e0fffa;
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: #00FFB2;
             margin-bottom: 10px;
             font-size: 2.5em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 2px 2px 8px rgba(0, 255, 178, 0.5);
         }
 
         .subtitle {
             text-align: center;
-            color: #666;
+            color: #00B7FF;
             margin-bottom: 30px;
             font-size: 1.1em;
         }
@@ -49,8 +50,9 @@
         .game-board {
             display: grid;
             grid-template-columns: 1fr 2fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
+            gap: 20px;
+            margin-bottom: 20px;
+            align-items: start;
         }
 
         /* Cubo de Espín */
@@ -59,52 +61,139 @@
         }
 
         .cube-container {
-            perspective: 1000px;
-            margin: 20px auto;
-            width: 150px;
-            height: 150px;
+            perspective: 800px;
+            margin: 30px auto;
+            width: 200px;
+            height: 200px;
+            position: relative;
+            border: 2px solid rgba(0, 255, 178, 0.3);
+            border-radius: 10px;
+            background: radial-gradient(circle at center, rgba(0, 255, 178, 0.15) 0%, rgba(3, 25, 22, 0.1) 70%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 25px rgba(0, 255, 178, 0.2);
+            z-index: 1;
         }
 
         .cube {
-            width: 100%;
-            height: 100%;
+            width: 150px;
+            height: 150px;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 1s cubic-bezier(0.4, 0.0, 0.2, 1);
+            transition: transform 1.2s ease;
             cursor: pointer;
+            transform: rotateX(10deg) rotateY(10deg);
+            z-index: 5;
+        }
+
+        /* Aplicamos efecto de brillo directamente a las caras en lugar de al cubo */
+        .cube::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background: transparent;
+            box-shadow: 0 0 25px rgba(0, 255, 178, 0.7);
+            border-radius: 5px;
+            z-index: -1;
+        }
+
+        @keyframes cube-glow {
+            0% {
+                box-shadow: 0 0 15px rgba(0, 255, 178, 0.4);
+            }
+
+            50% {
+                box-shadow: 0 0 25px rgba(0, 255, 178, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 0 35px rgba(0, 255, 178, 0.8);
+            }
+        }
+
+        /* Estilo cuando el contenedor está rotando */
+        .cube-container.rotating {
+            animation: cube-glow 1.2s ease-in-out;
+            box-shadow: 0 0 40px rgba(0, 255, 178, 0.8);
         }
 
         .cube-face {
             position: absolute;
-            width: 150px;
-            height: 150px;
-            border: 3px solid #333;
+            width: 100%;
+            height: 100%;
+            /* Bordes más gruesos y brillantes */
+            border: 5px solid #00FFB2;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 48px;
-            font-weight: bold;
-            background: white;
-            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.1);
+            font-size: 55px;
+            font-weight: 800;
+            /* Fondo más oscuro para mejor contraste */
+            background: rgba(0, 10, 8, 0.95);
+            /* Importante: hacer las caras opacas */
+            backface-visibility: hidden;
+            /* Sombra interior para efecto de profundidad */
+            box-shadow: inset 0 0 20px 5px rgba(0, 255, 178, 0.3);
+            /* Aseguramos máxima opacidad */
+            opacity: 1;
         }
 
         .cube-face.x {
-            color: #ff4444;
-            background: #ffe0e0;
+            color: #00FFB2;
+            text-shadow:
+                0 0 10px #00FFB2,
+                0 0 20px #00FFB2,
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000;
+            border-color: #00FFB2;
         }
 
         .cube-face.y {
-            color: #4444ff;
-            background: #e0e0ff;
+            color: #00B7FF;
+            text-shadow:
+                0 0 10px #00B7FF,
+                0 0 20px #00B7FF,
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000;
+            border-color: #00B7FF;
         }
 
         .cube-face.z {
-            color: #44ff44;
-            background: #e0ffe0;
+            color: #00FFEA;
+            text-shadow:
+                0 0 10px #00FFEA,
+                0 0 20px #00FFEA,
+                -2px -2px 0 #000,
+                2px -2px 0 #000,
+                -2px 2px 0 #000,
+                2px 2px 0 #000;
+            border-color: #00FFEA;
+            /* Ligeramente más grande */
+            font-size: 60px;
+        }
+
+        /* Estilo para el texto de las caras */
+        .face-content {
+            /* Centrar perfectamente el contenido */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            /* Añadimos un efecto de brillo para mejorar visibilidad */
+            filter: brightness(1.2);
         }
 
         .cube-face.front {
-            transform: rotateY(0deg) translateZ(75px);
+            transform: translateZ(75px);
         }
 
         .cube-face.back {
@@ -132,46 +221,56 @@
             text-align: center;
         }
 
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            min-height: 180px;
+        }
+
         .deck {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            background: linear-gradient(135deg, #00FFB2 0%, #00B7FF 100%);
             border-radius: 15px;
             width: 120px;
             height: 180px;
-            margin: 20px auto;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 24px;
-            color: white;
+            color: #033b35;
             cursor: pointer;
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 255, 178, 0.3);
+            /* Borde brillante para destacar el mazo */
+            border: 2px solid rgba(0, 255, 178, 0.5);
         }
 
         .deck:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 255, 178, 0.6);
         }
 
         .deck:active {
-            transform: translateY(0);
+            transform: translateY(0) scale(0.98);
         }
 
         .current-card {
             width: 120px;
             height: 180px;
-            margin: 20px auto;
             border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 72px;
             font-weight: bold;
-            background: white;
-            border: 3px solid #333;
+            background: rgba(26, 69, 65, 0.8);
+            border: 3px solid #00FFB2;
             transition: all 0.5s;
             animation: cardFlip 0.6s ease-out;
+            color: #00B7FF;
+            box-shadow: 0 10px 30px rgba(0, 255, 178, 0.3);
         }
 
         @keyframes cardFlip {
@@ -191,44 +290,45 @@
         }
 
         .card-x {
-            color: #ff4444;
-            background: #ffe0e0;
+            color: #00FFB2;
+            background: rgba(0, 255, 178, 0.2);
         }
 
         .card-y {
-            color: #4444ff;
-            background: #e0e0ff;
+            color: #00B7FF;
+            background: rgba(0, 183, 255, 0.2);
         }
 
         .card-z {
-            color: #44ff44;
-            background: #e0ffe0;
+            color: #00FFEA;
+            background: rgba(0, 255, 234, 0.2);
         }
 
         .card-b {
-            color: #ff44ff;
-            background: #ffe0ff;
+            color: #12FF9B;
+            background: rgba(18, 255, 155, 0.2);
         }
 
         .card-q {
-            color: #ffaa00;
-            background: #fff0e0;
+            color: #7CFFE1;
+            background: rgba(124, 255, 225, 0.2);
         }
 
         .card-r {
-            color: #00aaff;
-            background: #e0f0ff;
+            color: #00E1FF;
+            background: rgba(0, 225, 255, 0.2);
         }
 
         /* Jugadores */
         .players-section {
-            background: #f8f9fa;
+            background: rgba(26, 69, 65, 0.5);
             border-radius: 15px;
             padding: 20px;
+            border: 1px solid rgba(0, 255, 178, 0.3);
         }
 
         .player {
-            background: white;
+            background: rgba(12, 31, 29, 0.8);
             border-radius: 10px;
             padding: 15px;
             margin-bottom: 15px;
@@ -237,44 +337,59 @@
         }
 
         .player.active {
-            border-color: #667eea;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+            border-color: #00FFB2;
+            box-shadow: 0 5px 15px rgba(0, 255, 178, 0.5);
             transform: scale(1.05);
         }
 
         .player-name {
             font-weight: bold;
-            color: #333;
+            color: #00B7FF;
             margin-bottom: 5px;
         }
 
         .player-score {
             font-size: 24px;
-            color: #667eea;
+            color: #00FFB2;
             font-weight: bold;
         }
 
+        /* Contenedor para elementos de juego */
+        .game-elements-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+        
         /* Moneda */
         .coin-section {
             text-align: center;
-            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .coin-section h4 {
+            margin-bottom: 15px;
+            color: #00B7FF;
         }
 
         .coin {
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
-            border: 3px solid #b8860b;
+            background: linear-gradient(135deg, #00FFB2, #00B7FF);
+            border: 3px solid #00FFEA;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 48px;
             font-weight: bold;
-            margin: 20px auto;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 15px rgba(0, 255, 178, 0.5);
+            color: #033b35;
         }
 
         .coin:hover {
@@ -304,13 +419,14 @@
         .controls {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            margin-top: 30px;
+            gap: 15px;
+            margin-top: 15px;
+            margin-bottom: 15px;
         }
 
         button {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
+            background: linear-gradient(135deg, #00FFB2, #00B7FF);
+            color: #033b35;
             border: none;
             padding: 12px 30px;
             border-radius: 25px;
@@ -318,7 +434,7 @@
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 255, 178, 0.4);
         }
 
         button:hover {
@@ -335,20 +451,28 @@
             cursor: not-allowed;
         }
 
+        /* Contenedor de estado del juego */
+        .game-status-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
         /* Info */
         .info-panel {
-            background: #f0f0ff;
+            background: rgba(0, 255, 178, 0.1);
             border-radius: 10px;
             padding: 15px;
-            margin-top: 20px;
             text-align: center;
-            min-height: 60px;
+            min-height: 50px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 18px;
-            color: #333;
+            color: #00FFB2;
             animation: fadeIn 0.5s;
+            border: 1px solid rgba(0, 183, 255, 0.3);
         }
 
         @keyframes fadeIn {
@@ -366,10 +490,10 @@
         .stats {
             display: flex;
             justify-content: space-around;
-            margin-top: 20px;
-            padding: 15px;
-            background: #f8f9fa;
+            padding: 12px;
+            background: rgba(26, 69, 65, 0.5);
             border-radius: 10px;
+            border: 1px solid rgba(0, 255, 178, 0.3);
         }
 
         .stat {
@@ -377,13 +501,13 @@
         }
 
         .stat-label {
-            color: #666;
+            color: #00B7FF;
             font-size: 14px;
             margin-bottom: 5px;
         }
 
         .stat-value {
-            color: #333;
+            color: #00FFB2;
             font-size: 24px;
             font-weight: bold;
         }
@@ -403,7 +527,7 @@
 
         .modal-content {
             position: relative;
-            background: white;
+            background: rgba(12, 31, 29, 0.9);
             margin: 10% auto;
             padding: 30px;
             width: 80%;
@@ -411,6 +535,9 @@
             border-radius: 20px;
             text-align: center;
             animation: slideIn 0.5s;
+            border: 2px solid #00FFB2;
+            box-shadow: 0 0 30px rgba(0, 255, 178, 0.5);
+            color: #e0fffa;
         }
 
         @keyframes slideIn {
@@ -427,8 +554,9 @@
 
         .winner-text {
             font-size: 36px;
-            color: #667eea;
+            color: #00FFB2;
             margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(0, 255, 178, 0.5);
         }
 
         /* Responsive */
@@ -448,7 +576,7 @@
     <div class="game-container">
         <div style="display: flex; justify-content: flex-end; margin-bottom: 10px;">
             <a href="../index.html"
-                style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; padding: 8px 15px; border-radius: 20px; display: flex; align-items: center; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">
+                style="background: linear-gradient(135deg, #00FFB2, #00B7FF); color: #033b35; text-decoration: none; padding: 8px 15px; border-radius: 20px; display: flex; align-items: center; font-weight: bold; transition: all 0.3s ease; box-shadow: 0 3px 10px rgba(0,255,178,0.3);">
                 <span style="margin-right: 5px;">🏠</span> Inicio
             </a>
         </div>
@@ -468,19 +596,25 @@
                         <div class="cube-face bottom y">-Y</div>
                     </div>
                 </div>
-                <p id="cubeState">Estado: +Z</p>
+                <p id="cubeState"
+                    style="font-size: 22px; font-weight: bold; margin-top: 15px; color: #00FFB2; text-shadow: 0 0 8px rgba(0, 255, 178, 0.7), -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; background-color: rgba(3, 25, 22, 0.6); padding: 8px; border-radius: 10px; display: inline-block;">
+                    Estado: +Z</p>
             </div>
 
             <div class="cards-section">
                 <h3>Cartas Magnéticas</h3>
-                <div class="deck" id="deck" onclick="drawCard()">
-                    <span id="cardsLeft">30</span> 📇
-                </div>
-                <div id="currentCard" style="display:none;" class="current-card"></div>
+                <div class="game-elements-container">
+                    <div class="cards-container">
+                        <div class="deck" id="deck" onclick="drawCard()">
+                            <span id="cardsLeft">30</span> 📇
+                        </div>
+                        <div id="currentCard" style="display:none;" class="current-card"></div>
+                    </div>
 
-                <div class="coin-section">
-                    <h4>Automedidor Cuántico</h4>
-                    <div class="coin" id="coin" onclick="flipCoin()">?</div>
+                    <div class="coin-section">
+                        <h4>Automedidor Cuántico</h4>
+                        <div class="coin" id="coin" onclick="flipCoin()">?</div>
+                    </div>
                 </div>
             </div>
 
@@ -490,22 +624,24 @@
             </div>
         </div>
 
-        <div class="info-panel" id="infoPanel">
-            Haz clic en el mazo para sacar una carta
-        </div>
+        <div class="game-status-container">
+            <div class="info-panel" id="infoPanel">
+                Haz clic en el mazo para sacar una carta
+            </div>
 
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-label">Medidas Realizadas</div>
-                <div class="stat-value" id="measureCount">0</div>
-            </div>
-            <div class="stat">
-                <div class="stat-label">Turno Actual</div>
-                <div class="stat-value" id="turnCount">1</div>
-            </div>
-            <div class="stat">
-                <div class="stat-label">Dirección</div>
-                <div class="stat-value" id="direction">→</div>
+            <div class="stats" id="stats">
+                <div class="stat">
+                    <div class="stat-label">Medidas Realizadas</div>
+                    <div class="stat-value" id="measureCount">0</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Turno Actual</div>
+                    <div class="stat-value" id="turnCount">1</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-label">Dirección</div>
+                    <div class="stat-value" id="direction">→</div>
+                </div>
             </div>
         </div>
 
@@ -542,14 +678,14 @@
             gameEnded: false
         };
 
-        // Configuración del cubo
+        // Configuración del cubo simplificada
         const cubeRotations = {
             '+Z': 'rotateX(0deg) rotateY(0deg)',
             '-Z': 'rotateX(0deg) rotateY(180deg)',
-            '+X': 'rotateY(90deg) rotateZ(0deg)',
-            '-X': 'rotateY(-90deg) rotateZ(0deg)',
-            '+Y': 'rotateX(-90deg) rotateZ(0deg)',
-            '-Y': 'rotateX(90deg) rotateZ(0deg)'
+            '+X': 'rotateY(90deg)',
+            '-X': 'rotateY(-90deg)',
+            '+Y': 'rotateX(-90deg)',
+            '-Y': 'rotateX(90deg)'
         };
 
         // Inicializar el juego
@@ -557,6 +693,27 @@
             createDeck();
             updateDisplay();
             renderPlayers();
+
+            // Inicializar el cubo explícitamente
+            const cube = document.getElementById('cube');
+            cube.style.transition = 'transform 1s ease';
+            cube.style.transform = cubeRotations['+Z'];
+
+            // Agregar evento de clic al cubo para rotarlo manualmente
+            cube.addEventListener('click', () => {
+                if (!gameState.waitingForCoin) {
+                    randomRotateCube();
+                }
+            });
+
+            // Forzar una rotación inicial para asegurar que el cubo se muestra correctamente
+            setTimeout(() => {
+                randomRotateCube();
+                setTimeout(() => {
+                    gameState.cubeState = '+Z';
+                    rotateCube();
+                }, 1500);
+            }, 500);
         }
 
         // Crear el mazo de cartas
@@ -734,18 +891,49 @@
             }
         }
 
-        // Rotar cubo
+        // Rotar cubo - función simplificada
         function rotateCube() {
             const cube = document.getElementById('cube');
+
+            // Añadir clase para indicar que está rotando
+            document.querySelector('.cube-container').classList.add('rotating');
+
+            // Aplicar la transformación básica
             cube.style.transform = cubeRotations[gameState.cubeState];
+
+            // Actualizar el estado mostrado
             document.getElementById('cubeState').textContent = `Estado: ${gameState.cubeState}`;
+
+            // Quitar la clase después de la rotación
+            setTimeout(() => {
+                document.querySelector('.cube-container').classList.remove('rotating');
+            }, 1200);
         }
 
-        // Rotación aleatoria del cubo
+        // Rotación aleatoria del cubo - simplificada
         function randomRotateCube() {
             const states = ['+X', '-X', '+Y', '-Y', '+Z', '-Z'];
-            gameState.cubeState = states[Math.floor(Math.random() * states.length)];
+
+            // Evitar repetir el mismo estado
+            let newState;
+            do {
+                newState = states[Math.floor(Math.random() * states.length)];
+            } while (newState === gameState.cubeState);
+
+            gameState.cubeState = newState;
+
+            // Hacer la rotación más lenta
+            const cube = document.getElementById('cube');
+            const originalTransition = cube.style.transition;
+            cube.style.transition = 'transform 1.5s ease';
+
+            // Rotar
             rotateCube();
+
+            // Restaurar la transición original
+            setTimeout(() => {
+                cube.style.transition = originalTransition;
+            }, 1500);
         }
 
         // Siguiente turno
