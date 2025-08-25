@@ -60,6 +60,19 @@
 			font-size: 1.2em;
 		}
 
+		.description {
+			text-align: center;
+			color: #e0fffa;
+			margin-bottom: 30px;
+			font-size: 1.1em;
+			line-height: 1.6;
+			background: rgba(26, 69, 65, 0.3);
+			padding: 20px;
+			border-radius: 10px;
+			border-left: 3px solid #00FFB2;
+			border-right: 3px solid #00B7FF;
+		}
+
 		.section {
 			margin-bottom: 30px;
 			padding: 20px;
@@ -147,10 +160,14 @@
 	<div class="container">
 		<h1>🔬 Mundo Cuántico</h1>
 		<p class="subtitle">
-			Bienvenido al blog del curso <strong>Mundo Cuántico</strong>.
-			<br>
 			Aquí encontrarás las actividades desarrolladas durante el curso.
 		</p>
+
+		<div class="description">
+			Esta página surge como parte del curso "Mundo Cuántico" del Diplomado en Fronteras de la Física impartido
+			en el Planetario La Enseñanza. Bajo la dirección del profesor Jorge Iván Zuluaga Callejas, esta iniciativa
+			busca traducir conceptos complejos de física cuántica a formatos interactivos y accesibles.
+		</div>
 
 		<div class="section">
 			<h2><span class="icon">📚</span>Actividades disponibles</h2>
@@ -191,7 +208,7 @@
 		// Añadir animación inicial
 		window.addEventListener('load', function () {
 			setTimeout(() => {
-				document.querySelectorAll('.section').forEach((section, index) => {
+				document.querySelectorAll('.section, .description').forEach((section, index) => {
 					section.style.opacity = '0';
 					section.style.transform = 'translateY(20px)';
 					setTimeout(() => {

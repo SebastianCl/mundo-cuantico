@@ -4,6 +4,8 @@
 
 Bienvenido al repositorio del proyecto **Mundo Cuántico**, un blog interactivo que explora conceptos de física cuántica a través de actividades web dinámicas.
 
+Esta página surge como parte del curso "Mundo Cuántico" del Diplomado en Fronteras de la Física impartido en el Planetario La Enseñanza. Bajo la dirección del profesor Jorge Iván Zuluaga Callejas, esta iniciativa busca traducir conceptos complejos de física cuántica a formatos interactivos y accesibles.
+
 ## 🔍 Descripción
 
 **Mundo Cuántico** es un conjunto de actividades interactivas diseñadas para explorar y comprender conceptos fundamentales de la física cuántica de manera accesible y entretenida. El proyecto combina elementos educativos con interacciones visuales que facilitan la comprensión de fenómenos cuánticos complejos.
@@ -12,18 +14,19 @@ Bienvenido al repositorio del proyecto **Mundo Cuántico**, un blog interactivo 
 
 El proyecto incluye las siguientes actividades:
 
-1. **Actividad 2: Jugando con el Spin** - Una aplicación interactiva que permite experimentar con las propiedades del espín cuántico a través de un juego de cartas y un cubo de espín.
+1. **Actividad 1: Adopta un Libro** - Una iniciativa para seleccionar y leer un libro sobre física cuántica, incluyendo recursos multimedia y espacio para una reseña personal.
 
-2. **Actividad 3: El tamaño del mundo cuántico** - Exploración interactiva de las dimensiones y escalas del mundo cuántico.
+2. **Actividad 2: Jugando con el Spin** - Una aplicación interactiva que permite experimentar con las propiedades del espín cuántico a través de un juego de cartas y un cubo de espín.
 
-3. **Actividad 4: El experimento más bello de la física** - Visualización interactiva del famoso experimento de la doble rendija, considerado uno de los más bellos e importantes de la física.
+3. **Actividad 3: El tamaño del mundo cuántico** - Exploración interactiva de las dimensiones y escalas del mundo cuántico.
+
+4. **Actividad 4: El experimento más bello de la física** - Visualización interactiva del famoso experimento de la doble rendija, considerado uno de los más bellos e importantes de la física.
 
 ## 🚀 Tecnologías utilizadas
 
 - HTML5
 - CSS3
 - JavaScript (Vanilla)
-- Diseño responsivo
 
 ## 🎮 Características principales
 
@@ -45,7 +48,15 @@ El proyecto incluye las siguientes actividades:
 
 ## 🔬 Actividades en detalle
 
-### Jugando con el Spin
+### Adopta un libro
+
+Una actividad de lectura e investigación que incluye:
+- Selección del libro "Biología al Límite" que explora las conexiones entre física cuántica y biología
+- Acceso al libro en formato PDF
+- Resumen en formato de podcast
+- Espacio para elaborar una reseña personal sobre el contenido
+
+### Jugando con el espin
 
 Un juego interactivo que simula las propiedades del espín de partículas cuánticas. Incluye:
 - Cubo de espín con orientaciones X, Y, Z
@@ -64,7 +75,7 @@ Simulación interactiva del experimento de la doble rendija que demuestra la dua
 
 ## 👨‍💻 Autor
 
-- **Sebastian CL** - [SebastianCl](https://github.com/SebastianCl)
+- **Sebastian Cardona Loaiza** - [SebastianCl](https://github.com/SebastianCl)
 
 ## 📄 Licencia
 
