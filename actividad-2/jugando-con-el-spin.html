@@ -361,7 +361,7 @@
             gap: 20px;
             align-items: center;
         }
-        
+
         /* Moneda */
         .coin-section {
             text-align: center;
@@ -580,12 +580,12 @@
                 <span style="margin-right: 5px;">🏠</span> Inicio
             </a>
         </div>
-        <h1>🎲 Jugando con el Espín 🧲</h1>
+        <h1>Jugando con el espín</h1>
         <p class="subtitle">Un juego cuántico para explorar las propiedades del spin</p>
 
         <div class="game-board">
             <div class="cube-section">
-                <h3>Cubo de Espín</h3>
+                <h3>Cubo de espín</h3>
                 <div class="cube-container">
                     <div class="cube" id="cube">
                         <div class="cube-face front z">+Z</div>
@@ -602,7 +602,8 @@
             </div>
 
             <div class="cards-section">
-                <h3>Cartas Magnéticas</h3>
+                <h3>Cartas magnéticas</h3>
+                <br>
                 <div class="game-elements-container">
                     <div class="cards-container">
                         <div class="deck" id="deck" onclick="drawCard()">
@@ -612,7 +613,7 @@
                     </div>
 
                     <div class="coin-section">
-                        <h4>Automedidor Cuántico</h4>
+                        <h4>Automedidor cuántico</h4>
                         <div class="coin" id="coin" onclick="flipCoin()">?</div>
                     </div>
                 </div>
@@ -620,6 +621,7 @@
 
             <div class="players-section">
                 <h3>Jugadores</h3>
+                <br>
                 <div id="playersList"></div>
             </div>
         </div>
@@ -631,11 +633,11 @@
 
             <div class="stats" id="stats">
                 <div class="stat">
-                    <div class="stat-label">Medidas Realizadas</div>
+                    <div class="stat-label">Medidas realizadas</div>
                     <div class="stat-value" id="measureCount">0</div>
                 </div>
                 <div class="stat">
-                    <div class="stat-label">Turno Actual</div>
+                    <div class="stat-label">Turno actual</div>
                     <div class="stat-value" id="turnCount">1</div>
                 </div>
                 <div class="stat">
@@ -646,9 +648,9 @@
         </div>
 
         <div class="controls">
-            <button onclick="startNewGame()">🎮 Nuevo Juego</button>
+            <button onclick="startNewGame()">🎮 Nuevo juego</button>
             <button onclick="showRules()">📖 Reglas</button>
-            <button onclick="addPlayer()">➕ Agregar Jugador</button>
+            <button onclick="addPlayer()">➕ Agregar jugador</button>
         </div>
     </div>
 
@@ -797,7 +799,7 @@
                         nextTurn();
                     } else {
                         gameState.waitingForCoin = true;
-                        message += "Lanza el Automedidor Cuántico";
+                        message += "Lanza el automedidor cuántico";
                     }
                     break;
 
@@ -1042,23 +1044,23 @@
         function showRules() {
             const modalBody = document.getElementById('modalBody');
             modalBody.innerHTML = `
-                <h2>📖 Reglas del Juego</h2>
+                <h2>📖 Reglas del juego</h2>
                 <div style="text-align: left; max-height: 400px; overflow-y: auto;">
                     <h3>Objetivo</h3>
                     <p>Acumular la mayor cantidad de puntos después de 30 medidas cuánticas.</p>
                     
-                    <h3>Cartas y Acciones</h3>
+                    <h3>Cartas y acciones</h3>
                     <p><strong>X, Y:</strong> Si coincide con el cubo, ganas/pierdes según el signo. Si no, lanza la moneda para medir.</p>
                     <p><strong>Z:</strong> Si coincide con el cubo, ganas/pierdes según el signo. Si no, +1 punto directo.</p>
-                    <p><strong>B (Campo Magnético):</strong> -1 punto, el cubo gira aleatoriamente.</p>
-                    <p><strong>Q (Quantum Flip):</strong> Lanza la moneda, ganas/pierdes el doble y el cubo cambia de signo.</p>
+                    <p><strong>B (Campo magnético):</strong> -1 punto, el cubo gira aleatoriamente.</p>
+                    <p><strong>Q (Quantum flip):</strong> Lanza la moneda, ganas/pierdes el doble y el cubo cambia de signo.</p>
                     <p><strong>R (Reversa):</strong> Cambia la dirección del juego.</p>
                     
-                    <h3>Automedidor Cuántico (Moneda)</h3>
+                    <h3>Automedidor cuántico (Moneda)</h3>
                     <p>+ = +1 punto | - = -1 punto</p>
                     <p>Al medir, el cubo cambia al estado medido.</p>
                     
-                    <h3>Fin del Juego</h3>
+                    <h3>Fin del juego</h3>
                     <p>El juego termina después de 30 medidas. ¡El jugador con más puntos gana!</p>
                 </div>
             `;
